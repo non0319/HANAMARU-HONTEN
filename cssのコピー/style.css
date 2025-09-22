@@ -1,0 +1,1310 @@
+html {
+    font-size: 100%;
+    color: rgb(16, 16, 16);
+    overflow-x: hidden;
+}
+
+body {
+    font-family: "Shippori Mincho B1", serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    line-height: 36px;
+}
+
+a {
+    text-decoration: none;
+    color: rgb(16, 16, 16);
+}
+
+img {
+    width: 100%;
+    vertical-align: bottom;
+}
+
+li {
+    list-style: none;
+}
+
+.container {
+    max-width: 1200px;
+    padding-inline: 3%;
+    margin-inline: auto;
+}
+
+.fadein {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 1s;
+}
+
+
+.blur {
+    opacity: 0;
+    filter: blur(10px);
+    transform: scale(1.02);
+    transition: all 1s;
+}
+
+.IsScrollAllowed {
+    overflow: hidden;
+}
+
+/* -------------------------------------
+header
+---------------------------------------*/
+#main-header {
+    position: fixed;
+    width: 100%;
+    z-index: 10;
+    line-height: 1;
+    padding: 50px 0;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    text-align: center;
+}
+
+.header-h1 a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+}
+
+.logo {
+    width: 80px;
+    height: auto;
+    filter: drop-shadow(0px 0px 5px rgb(255, 255, 255));
+}
+
+.name {
+    font-size: 0.8rem;
+    color: #000;
+    filter: drop-shadow(0px 0px 1px rgb(255, 255, 255));
+}
+
+header.hide {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+
+/* ナビ */
+nav {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+
+nav ul {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+nav li a {
+    position: relative;
+    display: inline-block;
+    color: #f2f2f2;
+    font-size: 1.2rem;
+}
+
+nav li a:not(.insta-link)::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    height: 1px;
+    width: 100%;
+    background-color: #f2f2f2;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease-out;
+}
+
+nav li a:not(.insta-link):hover::after {
+    transform: scaleX(1);
+}
+
+nav li a.insta-link:hover img {
+    opacity: 0.6;
+    transition: opacity 0.5s;
+}
+
+nav li a.insta-link img {
+    display: block;
+    margin-top: 5px;
+    width: 30px;
+}
+
+/* 予約・電話番号 */
+.number {
+    color: #f2f2f2;
+    display: inline-block;
+    letter-spacing: 0.1rem;
+    text-align: center;
+    font-weight: 300;
+    font-family: "Noto Sans JP", sans-serif;
+    margin-top: 30px;
+}
+
+.number img {
+    width: 20px;
+    height: auto;
+}
+
+.reserve {
+    display: block;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+}
+
+.contact {
+    align-items: center;
+    gap: 8px;
+    /* アイコンと番号の間隔 */
+}
+
+.contact span {
+    font-size: 2rem;
+}
+
+.show .number {
+    display: block;
+}
+
+.show nav {
+    display: flex;
+    gap: 50px;
+}
+
+/* ハンバーガーメニュー */
+.hamburger {
+    width: 60px;
+    height: 60px;
+    transition: all 0.5s;
+    cursor: pointer;
+    z-index: 20;
+    position: relative;
+    display: none;
+}
+
+.hamburger span {
+    display: block;
+    position: absolute;
+    left: 25%;
+    width: 50%;
+    height: 2px;
+    background-color: #f2f2f2;
+    transition: all 0.5s;
+}
+
+.hamburger span:nth-child(1) {
+    top: 30%;
+}
+
+.hamburger span:nth-child(2) {
+    top: 50%;
+}
+
+.hamburger span:nth-child(3) {
+    top: 70%;
+}
+
+.open .hamburger span:nth-child(1) {
+    top: 50%;
+    transform: rotate(-315deg);
+}
+
+.open .hamburger span:nth-child(2) {
+    opacity: 0;
+}
+
+.open .hamburger span:nth-child(3) {
+    top: 50%;
+    transform: rotate(315deg);
+}
+
+#mask {
+    display: none;
+}
+
+.open #mask {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    opacity: 0.9;
+    z-index: 10;
+}
+
+/* 固定ヘッダー出現 */
+#fixed-header {
+    position: fixed;
+    display: none;
+    left: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: top 0.3s ease;
+    z-index: 10;
+    padding: 10px 20px;
+}
+
+#fixed-header .logo {
+    width: 50px;
+}
+
+#fixed-header.show {
+    top: 0;
+    /* スクロールで出現 */
+}
+
+.fixed-header__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-inline: auto;
+}
+
+
+#fixed-header nav li a {
+    color: #333;
+    font-size: 1rem;
+}
+
+#fixed-header .insta-link {
+    width: 30px;
+}
+
+#fixed-header nav li a::after {
+    background-color: #333;
+}
+
+#fixed-header .insta-link:hover img {
+    opacity: 0.6;
+    transition: opacity 0.3s;
+}
+
+#fixed-header .number {
+    color: #333;
+    display: inline-block;
+    letter-spacing: 0.1rem;
+    text-align: center;
+    font-weight: 300;
+    font-family: "Noto Sans JP", sans-serif;
+    margin-top: 0;
+}
+
+#fixed-header .reserve {
+    font-size: 0.8rem;
+    line-height: 1;
+}
+
+#fixed-header .contact-wrapper {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+#fixed-header .contact {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+#fixed-header .contact span {
+    font-size: 1.5rem;
+}
+
+
+
+
+/* -------------------------------------
+main-visual
+---------------------------------------*/
+
+.main-visual {
+    position: relative;
+    height: 100vh;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* 背景動画 */
+#video {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    height: 100vh;
+    z-index: -1;
+    overflow: hidden;
+    position: fixed;
+}
+
+#video video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    pointer-events: none;
+    z-index: 0;
+}
+
+
+/* 縦書メッセージ */
+.message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #f2f2f2;
+    line-height: 2.2;
+    z-index: -1;
+    font-weight: 300;
+    font-size: 1.3rem;
+}
+
+.lower-line {
+    margin-left: 3rem;
+}
+
+.message .line {
+    display: inline-block;
+    width: 2rem;
+    height: 1px;
+    background-color: #f2f2f2;
+    margin: 5px;
+}
+
+
+/* -------------------------------------
+about 花丸について
+---------------------------------------*/
+
+#about {
+    background-image: url(../img/about.png);
+    background-size: cover;
+    position: relative;
+    padding: 200px 0 300px 0;
+}
+
+.title-img {
+    width: 200px;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 100px;
+}
+
+.about-wrapper {
+    width: 100%;
+    margin-left: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.about-wrapper::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+}
+
+.shop-interior {
+    width: 100%;
+    height: 1000px;
+    object-fit: cover;
+}
+
+.overlay {
+    display: flex;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    justify-content: space-between;
+    gap: 100px;
+    width: 100%;
+}
+
+/* 店内背景の上のテキスト */
+.text-wrapper {
+    color: #f2f2f2;
+    writing-mode: vertical-rl;
+    line-height: 2.5;
+    letter-spacing: 0.4em;
+    margin-top: 200px;
+    margin-left: 50px;
+    width: 50%;
+}
+
+
+
+/* 大人の隠れ家 */
+.about-title {
+    font-weight: 100;
+    font-size: 2rem;
+    letter-spacing: 0.4rem;
+    line-height: 1.5;
+    color: #f2f2f2;
+    text-align: center;
+    width: 50%;
+    margin-top: 50px;
+}
+
+.sub-title {
+    font-size: 1.1rem;
+}
+
+.small {
+    font-size: 1.8rem;
+}
+
+.food {
+    width: 25%;
+    height: auto;
+    object-fit: cover;
+    position: absolute;
+    top: 58%;
+    right: 10%;
+    z-index: 3;
+}
+
+.drink {
+    width: 25%;
+    height: auto;
+    object-fit: cover;
+    position: absolute;
+    top: 72%;
+    right: 30%;
+    z-index: 2;
+}
+
+
+/* -------------------------------------
+menu 花丸の名物
+---------------------------------------*/
+
+#menu {
+    background-image: url(../img/menu-bg.png);
+    background-size: cover;
+    padding-top: 300px;
+    position: relative;
+}
+
+/* 花丸の味*/
+.menu {
+    position: absolute;
+    top: -110px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.menu-wrapper {
+    padding-inline: 2%;
+    margin-bottom: 120px;
+}
+
+.item-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    /* gap: 80px; */
+    z-index: 3;
+}
+
+/* おでん */
+.block1 {
+    max-width: 40%;
+    position: absolute;
+    right: -15%;
+    top: -30%;
+
+}
+
+.item1 {
+    flex-direction: row-reverse;
+    margin-bottom: 100px;
+}
+
+.img-wrapper {
+    margin-inline: auto;
+    position: relative;
+    padding: 0 2%;
+}
+
+.item-wrapper img {
+    height: auto;
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.menu-text {
+    padding: 0 5%;
+}
+
+.item-title {
+    font-size: 1.8rem;
+    font-weight: 300;
+    text-align: center;
+    line-height: 4rem;
+    margin-bottom: 50px;
+    position: relative;
+}
+
+.item-title span {
+    font-size: 4rem;
+}
+
+.item-title::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -10px;
+    /* 文字との間隔 */
+    transform: translateX(-50%);
+    width: 50%;
+    height: 2px;
+    background: linear-gradient(to right, rgba(171, 76, 4, 0.8), rgba(171, 76, 4, 0.4));
+    filter: blur(1px);
+    /* にじませて筆感を出す */
+}
+
+.inner .text {
+    font-family: "Noto Sans JP", sans-serif;
+    font-weight: 400;
+}
+
+.inner .sub {
+    font-size: 1.3rem;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+
+/* 辛か麺 */
+.item2 {
+    padding-bottom: 200px;
+}
+
+.noodles {
+    position: relative;
+    z-index: 2;
+}
+
+.block2 {
+    position: absolute;
+    top: 150px;
+    left: -200px;
+}
+
+
+/* その他メニュー */
+.note-wrapper {
+    background-image: url(../img/menu-note.png);
+    background-size: cover;
+    display: flex;
+    position: relative;
+    margin-bottom: 100px;
+}
+
+.menu-note {
+    writing-mode: vertical-rl;
+    font-size: 3rem;
+    text-align: left;
+    letter-spacing: 0.5rem;
+    line-height: 2;
+    padding: 100px 0 0 100px;
+    color: #f2f2f2;
+}
+
+/* 料理画像３枚 */
+.dish-wrapper {
+    background-color: #97744b9d;
+    width: 100%;
+    margin: 100px -100px -60px 0;
+    position: relative;
+}
+
+.dish-items img {
+    max-width: 100%;
+    object-fit: cover;
+}
+
+.dish-items li {
+    position: absolute;
+}
+
+.dish1 {
+    top: -5%;
+    left: 30%;
+    transform: rotate(-5deg);
+    z-index: 2;
+    width: 500px;
+}
+
+.dish2 {
+    top: 40%;
+    left: 20%;
+    transform: rotate(4deg);
+    z-index: 3;
+    width: 400px;
+}
+
+.dish3 {
+    top: 60%;
+    left: 55%;
+    transform: rotate(-3deg);
+    z-index: 4;
+    width: 350px;
+}
+
+.dish-items li {
+    opacity: 0;
+    transform: translateY(20px);
+    /* 下から浮かび上がる感じ */
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.dish-items li.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+
+/* オードブルへ */
+.order-link {
+    background-image: url(../img/bg1.jpg);
+    padding: 100px 0;
+    color: #f2f2f2;
+    text-align: center;
+}
+
+.order-link p {
+    margin-bottom: 50px;
+    font-size: 1.5rem;
+}
+
+.order-link a {
+    color: #f2f2f2;
+    padding: 20px 30px;
+    border: 1px solid;
+    transition: all 0.3s ease;
+}
+
+.order-link a:hover {
+    background-color: #f2f2f2;
+    color: #333;
+}
+
+/* -------------------------------------
+footer
+---------------------------------------*/
+footer {
+    background-image: url(../img/shop.png);
+    background-size: cover;
+    position: relative;
+    color: white;
+    padding: 200px 0 20px 0;
+    z-index: 0;
+    font-family: "Noto Sans JP", sans-serif;
+}
+
+footer::before {
+    position: absolute;
+    content: "";
+    inset: 0;
+    background: rgba(19, 8, 1, 0.8);
+    z-index: -1;
+}
+
+footer .number {
+    line-height: 1;
+}
+
+/* 店舗情報 */
+footer .information {
+    text-align: center;
+    margin-bottom: 150px;
+    padding: 50px 0;
+    font-family: "Shippori Mincho B1", serif;
+}
+
+.info-wrapper {
+    display: flex;
+    width: 100%;
+    margin-bottom: 200px;
+}
+
+.info-left {
+    width: 50%;
+    text-align: center;
+}
+
+.info-left .contact {
+    margin-bottom: 100px;
+}
+
+.info-left .contact span {
+    font-size: 2rem;
+}
+
+iframe {
+    width: 100%;
+    height: 500px;
+    filter: grayscale(100%);
+}
+
+.info-right {
+    width: 50%;
+    margin-left: 3%;
+}
+
+.sub-name {
+    line-height: 1.3;
+    margin-bottom: 50px;
+    text-align: center;
+    font-size: 1.3rem;
+}
+
+.sub-name span {
+    font-size: 0.8rem;
+}
+
+footer dl {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+footer dt {
+    width: 40%;
+    padding: 20px 0;
+    border-top: 1px solid #cdcdcd9e;
+}
+
+footer dd {
+    width: 60%;
+    padding: 20px 0;
+    border-top: 1px solid #cdcdcd9e;
+}
+
+footer dt:last-of-type,
+footer dd:last-of-type {
+    border-bottom: 1px solid #cdcdcd9e;
+}
+
+.copyright {
+    display: block;
+    text-align: center;
+}
+
+
+/* 固定 */
+.fixed-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-width: 100%;
+    /* 横スクロール防止 */
+    display: flex;
+    justify-content: space-around;
+    background-color: #cbbf9d;
+    /* ゴールド系背景 */
+    border-top: 1px solid #333;
+    z-index: 10;
+    box-sizing: border-box;
+    /* パディングを含めて計算 */
+    overflow-x: hidden;
+}
+
+.fixed-footer a {
+    flex: 1;
+    text-align: center;
+    padding: 0.5rem 0;
+    color: #000;
+    font-size: 0.8rem;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-right: 1px solid #333;
+    font-family: "Noto Sans JP", sans-serif;
+    box-sizing: border-box;
+    /* これも重要 */
+}
+
+.fixed-footer a:last-child {
+    border-right: none;
+}
+
+.fixed-footer a img {
+    width: 24px;
+    height: 24px;
+    margin-bottom: 0.2rem;
+    max-width: 100%;
+    /* 念のため */
+}
+
+
+@media (min-width: 768px) {
+    .fixed-footer {
+        display: none;
+        /* PCでは非表示 */
+
+    }
+}
+
+.footer__page-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: #f2f2f2;
+    border: 1px solid;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 100;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.footer__page-top.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.footer__page-top:hover {
+    background-color: black;
+    color: #f2f2f2;
+    border: none;
+    transform: scale(1.1);
+}
+
+/* -------------------------------------
+plate.html
+---------------------------------------*/
+.plate-bg {
+    background-image: url(../img/bg1.jpg);
+    background-size: cover;
+}
+
+#plate {
+    padding: 400px 0 150px 0;
+    background-image: url(../img/menu-bg.png);
+    background-size: cover;
+}
+
+.plate {
+    margin-inline: auto;
+}
+
+#plate .item-title {
+    margin-bottom: 50px;
+}
+
+.plate-img {
+    width: 70%;
+    display: block;
+    margin-inline: auto;
+    margin-bottom: 80px;
+     filter: drop-shadow(0px 0px 20px rgb(174, 128, 43));
+}
+
+#plate p {
+    max-width: 60%;
+    margin-inline: auto;
+}
+
+
+
+
+/* -------------------------------------
+タブレット対応
+---------------------------------------*/
+@media (max-width: 1024px) {
+
+    nav li a {
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+
+    nav li a.insta-link img {
+        width: 50px;
+    }
+
+    .contact span {
+        font-size: 1.5rem;
+    }
+
+    #fixed-header nav li a {
+        font-size: 0.9rem;
+    }
+
+    #fixed-header .contact span {
+        font-size: 1rem;
+    }
+
+    .item-title {
+        font-size: 1.5rem;
+    }
+
+    .item-title span {
+        font-size: 3rem;
+    }
+
+    .food {
+        top: 65%;
+    }
+
+    .drink {
+        top: 75%;
+        right: 30%;
+    }
+
+    .menu-note {
+        font-size: 1.1rem;
+        padding: 50px 0 0 0;
+        margin: 0 auto;
+    }
+
+    .dish-items img {
+        width: 50%;
+    }
+
+    .dish-wrapper {
+        width: 80%;
+    }
+}
+
+
+/* -------------------------------------
+スマホ対応
+---------------------------------------*/
+
+
+@media (max-width: 768px) {
+    #page-top-btn {
+        display: none;
+    }
+
+    .header-h1 {
+        transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+
+    .header-h1.hide {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    #main-header {
+        padding: 20px;
+    }
+
+    .logo {
+        width: 50px;
+    }
+
+    .message {
+        width: 100%;
+        top: 50%;
+        left: 11%;
+        writing-mode: vertical-rl;
+    }
+
+    .message .line {
+        width: 1px;
+        height: 2rem;
+    }
+
+    /* nav */
+    #nav-menu {
+        position: absolute;
+        top: 0;
+        right: -100%;
+        width: 40%;
+        z-index: 20;
+        padding: 100px 0;
+        opacity: 0;
+        overflow-x: hidden;
+        overflow-y: auto;
+        transition: all 0.5s;
+        margin-top: 50px;
+    }
+
+    #nav-menu li {
+        display: none;
+    }
+
+    .nav {
+        flex-direction: column;
+    }
+
+    #nav-menu .number {
+        display: none !important;
+    }
+
+    .open #nav-menu {
+        right: 10%;
+        opacity: 1;
+        position: fixed;
+    }
+
+    .open #nav-menu li {
+        display: block;
+    }
+
+    .hamburger {
+        display: block;
+        position: fixed;
+        z-index: 20;
+        top: 0;
+        right: 0;
+        background-color: #a7611bb0;
+    }
+
+    /* 固定ヘッダー非表示 */
+    #fixed-header {
+        display: none !important;
+    }
+
+    /* 花丸について */
+    #about {
+        padding: 100px 0 200px 0
+    }
+
+    .title-img {
+        width: 150px;
+    }
+
+    /* 店内背景部分 */
+    .overlay {
+        flex-direction: column-reverse;
+        padding-inline: 6%;
+    }
+
+    .about-title {
+        width: 100%;
+        font-size: 1.5rem;
+    }
+
+    .small {
+        font-size: 1.2rem;
+    }
+
+    .text-wrapper {
+        writing-mode: horizontal-tb;
+        width: 100%;
+        line-height: 2;
+        letter-spacing: 0.1em;
+        margin-top: 50px;
+        margin: 0 auto;
+        font-size: 14px;
+    }
+
+    .text-wrapper br {
+        display: none;
+    }
+
+    .text-wrapper br.keep {
+        display: inline;
+    }
+
+
+    /* 花丸の名物 */
+    #menu {
+        padding-top: 200px;
+    }
+
+    .drink,
+    .food {
+        width: 40%;
+        height: auto;
+    }
+
+    .food {
+        top: 74%;
+    }
+
+    .drink {
+        top: 82%;
+        right: 30%;
+    }
+
+    .item-wrapper {
+        flex-direction: column;
+    }
+
+    .img-wrapper {
+        width: 60%;
+        text-align: center;
+    }
+
+    .block1 {
+        top: -10%;
+    }
+
+    .block2 {
+        top: 15%;
+    }
+
+    .item-wrapper {
+        gap: 30px;
+    }
+
+    .item-title {
+        font-size: 1.2rem;
+        line-height: 1.4;
+        margin-bottom: 20px;
+        z-index: 5;
+    }
+
+    .item-title span {
+        font-size: 2.5rem;
+    }
+
+    .item1 {
+        margin-bottom: 200px;
+    }
+
+    .item2 {
+        padding-bottom: 0;
+    }
+
+    .inner .sub {
+        font-size: 1.1rem;
+    }
+
+    .inner .text {
+        line-height: 2;
+    }
+
+    /* 他の料理 */
+
+    .note-wrapper {
+        display: flex;
+        flex-direction: column;
+        padding: 50px 0;
+    }
+
+    .menu-note {
+        font-size: 1.1rem;
+        padding: 50px 0 0 0;
+        margin: 0 auto;
+    }
+
+    .dish-wrapper {
+        margin: 0 auto;
+        padding: 30px 0;
+    }
+
+    .show {
+        width: 100%;
+    }
+
+    .dish-items li {
+        position: static;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    /* オードブルへのリンク部分 */
+    .order-link p {
+        font-size: 1.1rem;
+    }
+
+
+    .menu-link {
+        position: relative;
+    }
+
+    .menu-link::after {
+        content: "";
+        display: inline-block;
+        width: 0.5em;
+        height: 0.5em;
+        border-right: 2px solid currentColor;
+        border-bottom: 2px solid currentColor;
+        transform: rotate(-45deg);
+        vertical-align: middle;
+        position: relative;
+        top: -0.1em;
+        left: 1em;
+    }
+
+    .info-wrapper {
+        flex-direction: column-reverse;
+    }
+
+    .info-right {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .info-left {
+        display: none;
+    }
+
+    footer {
+        padding: 200px 0;
+    }
+
+    footer .information {
+        margin-bottom: 100px;
+    }
+
+/* -------------------------------------
+plate.html
+---------------------------------------*/
+#plate {
+     padding: 200px 2% 80px 2%;
+}
+
+#plate p {
+    max-width: 100%;
+    line-height: 2;
+}
+
+
+
+    /* 固定フッター */
+    .fixed-footer {
+        width: 100vw;
+        /* ←スマホは100vwの方が確実 */
+        left: 0;
+        right: 0;
+    }
+
+
+}

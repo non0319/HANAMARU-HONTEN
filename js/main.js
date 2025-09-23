@@ -67,16 +67,19 @@ document.addEventListener("DOMContentLoaded", () => {
     /*=============================================
     スマホ用電話リンク
     =============================================*/
+   document.addEventListener("DOMContentLoaded", () => {
     const telLink = document.getElementById("tel-link");
-    const phoneNumber = "08039029208";
+    const phoneNumber = "08039029208"; // 最新番号に更新
 
     if (telLink) {
         if (/Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
             telLink.setAttribute("href", "tel:" + phoneNumber);
+            console.log("telリンクを更新:", phoneNumber);
         } else {
             telLink.removeAttribute("href");
         }
     }
+});
 
     /*=============================================
     ハンバーガーメニュー

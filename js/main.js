@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
     スマホ用電話リンク
     =============================================*/
     const telLink = document.getElementById("tel-link");
-    const phoneNumber = "09012345678";
+    const phoneNumber = "08039029208";
 
     if (telLink) {
         if (/Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
